@@ -29,17 +29,11 @@ class GildedRose {
         updateDailyQuality(item);
         item.sellIn--;
         if (item.sellIn < 0) {
-            updateExpiredQuality(item);
-        }
-    }
-
-    private void updateExpiredQuality(Item item) {
-        if (isAgedBrie(item)) {
-            increaseQuality(item);
-        } else if (isBackstagePasses(item)) {
-            item.quality = 0;
-        } else {
-            decreaseQuality(item);
+            if (isBackstagePasses(item)) {
+                item.quality = 0;
+            } else {
+                updateDailyQuality(item);
+            }
         }
     }
 
@@ -54,13 +48,10 @@ class GildedRose {
     }
 
     private void updateBackstagePassQuality(Item item) {
-        increaseQuality(item);
-        if (item.sellIn < BACKSTAGE_DOUBLE_BONUS_THRESHOLD) {
-            increaseQuality(item);
-        }
-        if (item.sellIn < BACKSTAGE_TRIPLE_BONUS_THRESHOLD) {
-            increaseQuality(item);
-        }
+        int bonus = 1;
+        if (item.sellIn < BACKSTAGE_DOUBLE_BONUS_THRESHOLD) bonus++;
+        if (item.sellIn < BACKSTAGE_TRIPLE_BONUS_THRESHOLD) bonus++;
+        item.quality = Math.min(MAX_QUALITY, item.quality + bonus);
     }
 
     private void increaseQuality(Item item) {
