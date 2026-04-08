@@ -30,7 +30,7 @@ class GildedRose {
         item.sellIn--;
         if (item.sellIn < 0) {
             if (isBackstagePasses(item)) {
-                item.quality = 0;
+                item.quality = MIN_QUALITY;
             } else {
                 updateDailyQuality(item);
             }
