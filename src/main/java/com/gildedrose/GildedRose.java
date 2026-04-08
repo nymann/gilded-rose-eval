@@ -10,7 +10,7 @@ class GildedRose {
         AgedBrieUpdater.NAME,      AgedBrieUpdater::new,
         BackstagePassUpdater.NAME, BackstagePassUpdater::new,
         SulfurasUpdater.NAME,      SulfurasUpdater::new,
-        "Conjured Mana Cake",      ConjuredItemUpdater::new
+        "Conjured Mana Cake",      item -> new DegradingItemUpdater(item, 2)
     );
 
     public GildedRose(Item[] items) {
@@ -24,6 +24,6 @@ class GildedRose {
     }
 
     private ItemUpdater updaterFor(Item item) {
-        return UPDATERS.getOrDefault(item.name, NormalItemUpdater::new).apply(item);
+        return UPDATERS.getOrDefault(item.name, item2 -> new DegradingItemUpdater(item2, 1)).apply(item);
     }
 }
