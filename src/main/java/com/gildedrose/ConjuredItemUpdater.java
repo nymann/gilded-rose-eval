@@ -10,5 +10,9 @@ class ConjuredItemUpdater extends ItemUpdater {
         decreaseQuality();
         decreaseQuality();
         item.sellIn--;
+        if (item.sellIn < 0) {
+            decreaseQuality();
+            decreaseQuality();
+        }
     }
 }
