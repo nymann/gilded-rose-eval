@@ -35,4 +35,24 @@ public class ConjuredItemTest {
 
         assertEquals(6, item.quality);
     }
+
+    @Test
+    void conjuredItemQualityNeverGoesBelowZero() {
+        Item item = new Item("Conjured Mana Cake", 5, 1);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(0, item.quality);
+    }
+
+    @Test
+    void conjuredItemQualityNeverGoesBelowZeroAfterSellByDate() {
+        Item item = new Item("Conjured Mana Cake", 0, 3);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(0, item.quality);
+    }
 }
