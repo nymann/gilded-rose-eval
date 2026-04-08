@@ -13,6 +13,9 @@ class GildedRose {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                         items[i].quality = items[i].quality - 1;
+                        if (items[i].name.startsWith("Conjured") && items[i].quality > 0) {
+                            items[i].quality = items[i].quality - 1;
+                        }
                     }
                 }
             } else {
