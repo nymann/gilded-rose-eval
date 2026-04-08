@@ -24,4 +24,14 @@ public class ConjuredItemTest {
 
         assertEquals(4, item.sellIn);
     }
+
+    @Test
+    void givenConjuredItemAfterSellByDateQualityDecreasesByFourPerDay() {
+        Item item = new Item("Conjured Mana Cake", 0, 10);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(6, item.quality);
+    }
 }
