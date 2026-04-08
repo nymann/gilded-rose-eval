@@ -6,6 +6,9 @@ class GildedRose {
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String CONJURED = "Conjured Mana Cake";
 
+    private static final int BACKSTAGE_TIER2_THRESHOLD = 11;
+    private static final int BACKSTAGE_TIER3_THRESHOLD = 6;
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -52,18 +55,16 @@ class GildedRose {
 
     private void updateBackstagePassQuality(Item item) {
         increaseQuality(item);
-        if (item.sellIn < 11) {
+        if (item.sellIn < BACKSTAGE_TIER2_THRESHOLD) {
             increaseQuality(item);
         }
-        if (item.sellIn < 6) {
+        if (item.sellIn < BACKSTAGE_TIER3_THRESHOLD) {
             increaseQuality(item);
         }
     }
 
     private void increaseQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
-        }
+        item.quality = Math.min(50, item.quality + 1);
     }
 
     private boolean isAgedBrie(Item item) {
