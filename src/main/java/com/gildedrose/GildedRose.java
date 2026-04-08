@@ -8,8 +8,8 @@ class GildedRose {
 
     private static final int MAX_QUALITY = 50;
     private static final int MIN_QUALITY = 0;
-    private static final int BACKSTAGE_TIER2_THRESHOLD = 11;
-    private static final int BACKSTAGE_TIER3_THRESHOLD = 6;
+    private static final int BACKSTAGE_DOUBLE_BONUS_THRESHOLD = 11;
+    private static final int BACKSTAGE_TRIPLE_BONUS_THRESHOLD = 6;
 
     Item[] items;
 
@@ -24,13 +24,12 @@ class GildedRose {
     }
 
     private void advanceOneDay(Item item) {
-        updateDailyQuality(item);
+        if (isSulfuras(item)) return;
 
-        if (!isSulfuras(item)) {
-            item.sellIn--;
-            if (item.sellIn < 0) {
-                updateExpiredQuality(item);
-            }
+        updateDailyQuality(item);
+        item.sellIn--;
+        if (item.sellIn < 0) {
+            updateExpiredQuality(item);
         }
     }
 
@@ -45,8 +44,6 @@ class GildedRose {
     }
 
     private void updateDailyQuality(Item item) {
-        if (isSulfuras(item)) return;
-
         if (isAgedBrie(item)) {
             increaseQuality(item);
         } else if (isBackstagePasses(item)) {
@@ -58,10 +55,10 @@ class GildedRose {
 
     private void updateBackstagePassQuality(Item item) {
         increaseQuality(item);
-        if (item.sellIn < BACKSTAGE_TIER2_THRESHOLD) {
+        if (item.sellIn < BACKSTAGE_DOUBLE_BONUS_THRESHOLD) {
             increaseQuality(item);
         }
-        if (item.sellIn < BACKSTAGE_TIER3_THRESHOLD) {
+        if (item.sellIn < BACKSTAGE_TRIPLE_BONUS_THRESHOLD) {
             increaseQuality(item);
         }
     }
