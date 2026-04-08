@@ -51,11 +51,15 @@ class GildedRose {
         int bonus = 1;
         if (item.sellIn < BACKSTAGE_DOUBLE_BONUS_THRESHOLD) bonus++;
         if (item.sellIn < BACKSTAGE_TRIPLE_BONUS_THRESHOLD) bonus++;
-        item.quality = Math.min(MAX_QUALITY, item.quality + bonus);
+        item.quality = clampedQuality(item.quality + bonus);
     }
 
     private void increaseQuality(Item item) {
-        item.quality = Math.min(MAX_QUALITY, item.quality + 1);
+        item.quality = clampedQuality(item.quality + 1);
+    }
+
+    private int clampedQuality(int value) {
+        return Math.max(MIN_QUALITY, Math.min(MAX_QUALITY, value));
     }
 
     private boolean isAgedBrie(Item item) {
@@ -75,6 +79,6 @@ class GildedRose {
     }
 
     private void decreaseQuality(Item item) {
-        item.quality = Math.max(MIN_QUALITY, item.quality - (isConjured(item) ? 2 : 1));
+        item.quality = clampedQuality(item.quality - (isConjured(item) ? 2 : 1));
     }
 }
