@@ -30,7 +30,7 @@ class GildedRose {
 
     private void updateConjured(Item item) {
         item.sellIn--;
-        item.quality = clampQuality(item.quality - 2);
+        item.quality = clampQuality(item.quality - (item.sellIn < 0 ? 4 : 2));
     }
 
     private void updateNormal(Item item) {
