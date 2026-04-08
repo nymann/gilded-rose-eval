@@ -6,6 +6,8 @@ class GildedRose {
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String CONJURED = "Conjured Mana Cake";
 
+    private static final int MAX_QUALITY = 50;
+    private static final int MIN_QUALITY = 0;
     private static final int BACKSTAGE_TIER2_THRESHOLD = 11;
     private static final int BACKSTAGE_TIER3_THRESHOLD = 6;
 
@@ -26,10 +28,9 @@ class GildedRose {
 
         if (!isSulfuras(item)) {
             item.sellIn--;
-        }
-
-        if (item.sellIn < 0) {
-            updateExpiredQuality(item);
+            if (item.sellIn < 0) {
+                updateExpiredQuality(item);
+            }
         }
     }
 
@@ -64,7 +65,7 @@ class GildedRose {
     }
 
     private void increaseQuality(Item item) {
-        item.quality = Math.min(50, item.quality + 1);
+        item.quality = Math.min(MAX_QUALITY, item.quality + 1);
     }
 
     private boolean isAgedBrie(Item item) {
@@ -84,6 +85,6 @@ class GildedRose {
     }
 
     private void decreaseQuality(Item item) {
-        item.quality = Math.max(0, item.quality - (isConjured(item) ? 2 : 1));
+        item.quality = Math.max(MIN_QUALITY, item.quality - (isConjured(item) ? 2 : 1));
     }
 }
