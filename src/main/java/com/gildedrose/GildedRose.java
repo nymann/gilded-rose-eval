@@ -21,7 +21,7 @@ class GildedRose {
     private void updateItem(Item item) {
         updateQualityBeforeSellByDate(item);
 
-        if (!item.name.equals(SULFURAS)) {
+        if (!isSulfuras(item)) {
             item.sellIn = item.sellIn - 1;
         }
 
@@ -51,7 +51,7 @@ class GildedRose {
             }
         } else {
             if (item.quality > 0) {
-                if (!item.name.equals(SULFURAS)) {
+                if (!isSulfuras(item)) {
                     decreaseQuality(item);
                 }
             }
@@ -62,7 +62,7 @@ class GildedRose {
         if (!item.name.equals(AGED_BRIE)) {
             if (!item.name.equals(BACKSTAGE_PASSES)) {
                 if (item.quality > 0) {
-                    if (!item.name.equals(SULFURAS)) {
+                    if (!isSulfuras(item)) {
                         decreaseQuality(item);
                     }
                 }
@@ -74,6 +74,10 @@ class GildedRose {
                 item.quality = item.quality + 1;
             }
         }
+    }
+
+    private boolean isSulfuras(Item item) {
+        return item.name.equals(SULFURAS);
     }
 
     private void decreaseQuality(Item item) {
