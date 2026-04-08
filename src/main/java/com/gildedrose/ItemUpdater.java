@@ -34,27 +34,36 @@ abstract class ItemUpdater {
 }
 
 abstract class LinearItemUpdater extends ItemUpdater {
-    LinearItemUpdater(Item item) { super(item); }
+    private final int baseRate;
+
+    LinearItemUpdater(Item item, int baseRate) {
+        super(item);
+        this.baseRate = baseRate;
+    }
 
     @Override
     void update() {
         decrementSellIn();
-        int amount = item.sellIn < 0 ? 2 : 1;
+        int amount = (item.sellIn < 0 ? 2 : 1) * baseRate;
         applyQualityChange(amount);
     }
 
     abstract void applyQualityChange(int amount);
 }
 
-class NormalItemUpdater extends LinearItemUpdater {
-    NormalItemUpdater(Item item) { super(item); }
+abstract class LinearDecreasingUpdater extends LinearItemUpdater {
+    LinearDecreasingUpdater(Item item, int baseRate) { super(item, baseRate); }
 
     @Override
     void applyQualityChange(int amount) { decreaseQuality(amount); }
 }
 
+class NormalItemUpdater extends LinearDecreasingUpdater {
+    NormalItemUpdater(Item item) { super(item, 1); }
+}
+
 class AgedBrieUpdater extends LinearItemUpdater {
-    AgedBrieUpdater(Item item) { super(item); }
+    AgedBrieUpdater(Item item) { super(item, 1); }
 
     @Override
     void applyQualityChange(int amount) { increaseQuality(amount); }
@@ -78,14 +87,8 @@ class BackstagePassUpdater extends ItemUpdater {
     }
 }
 
-class ConjuredItemUpdater extends ItemUpdater {
-    ConjuredItemUpdater(Item item) { super(item); }
-
-    @Override
-    void update() {
-        decrementSellIn();
-        decreaseQuality(2);
-    }
+class ConjuredItemUpdater extends LinearDecreasingUpdater {
+    ConjuredItemUpdater(Item item) { super(item, 2); }
 }
 
 class SulfurasUpdater extends ItemUpdater {
