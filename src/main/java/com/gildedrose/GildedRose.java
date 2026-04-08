@@ -15,12 +15,11 @@ class GildedRose {
 
     private void updateItem(Item item) {
         if (!item.name.equals("Aged Brie") && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            if (item.quality > 0) {
-                if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                    item.quality = item.quality - 1;
-                    if (item.name.startsWith("Conjured") && item.quality > 0) {
-                        item.quality = item.quality - 1;
-                    }
+            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                if (item.name.startsWith("Conjured")) {
+                    decreaseQuality(item, 2);
+                } else {
+                    decreaseQuality(item, 1);
                 }
             }
         } else {
