@@ -45,11 +45,13 @@ class GildedRose {
     }
 
     private void updateDailyQuality(Item item) {
+        if (isSulfuras(item)) return;
+
         if (isAgedBrie(item)) {
             increaseQuality(item);
         } else if (isBackstagePasses(item)) {
             updateBackstagePassQuality(item);
-        } else if (!isSulfuras(item)) {
+        } else {
             decreaseQuality(item);
         }
     }
