@@ -9,7 +9,8 @@ class GildedRose {
     private static final Map<String, Function<Item, ItemUpdater>> UPDATERS = Map.of(
         AgedBrieUpdater.NAME,      AgedBrieUpdater::new,
         BackstagePassUpdater.NAME, BackstagePassUpdater::new,
-        SulfurasUpdater.NAME,      SulfurasUpdater::new
+        SulfurasUpdater.NAME,      SulfurasUpdater::new,
+        "Conjured Mana Cake",      ConjuredItemUpdater::new
     );
 
     public GildedRose(Item[] items) {
