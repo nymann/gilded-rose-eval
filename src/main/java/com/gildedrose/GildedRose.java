@@ -29,13 +29,16 @@ class GildedRose {
     }
 
     private void updateConjured(Item item) {
-        item.sellIn--;
-        item.quality = clampQuality(item.quality - (item.sellIn < 0 ? 4 : 2));
+        updateNormal(item, 2);
     }
 
     private void updateNormal(Item item) {
+        updateNormal(item, 1);
+    }
+
+    private void updateNormal(Item item, int degradeRate) {
         item.sellIn--;
-        item.quality = clampQuality(item.quality - (item.sellIn < 0 ? 2 : 1));
+        item.quality = clampQuality(item.quality - (item.sellIn < 0 ? degradeRate * 2 : degradeRate));
     }
 
     private void updateAgedBrie(Item item) {
