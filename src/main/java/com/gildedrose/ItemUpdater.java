@@ -13,6 +13,7 @@ abstract class ItemUpdater {
             case "Aged Brie" -> new AgedBrieUpdater(item);
             case "Backstage passes to a TAFKAL80ETC concert" -> new BackstagePassUpdater(item);
             case "Sulfuras, Hand of Ragnaros" -> new SulfurasUpdater(item);
+            case "Conjured Mana Cake" -> new ConjuredItemUpdater(item);
             default -> new NormalItemUpdater(item);
         };
     }
@@ -74,6 +75,16 @@ class BackstagePassUpdater extends ItemUpdater {
         } else {
             increaseQuality(1);
         }
+    }
+}
+
+class ConjuredItemUpdater extends ItemUpdater {
+    ConjuredItemUpdater(Item item) { super(item); }
+
+    @Override
+    void update() {
+        decrementSellIn();
+        decreaseQuality(2);
     }
 }
 
