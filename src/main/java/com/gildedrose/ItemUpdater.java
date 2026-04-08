@@ -9,6 +9,14 @@ abstract class ItemUpdater {
 
     abstract void update();
 
+    protected void degradeBy(int rate) {
+        for (int i = 0; i < rate; i++) decreaseQuality();
+        item.sellIn--;
+        if (item.sellIn < 0) {
+            for (int i = 0; i < rate; i++) decreaseQuality();
+        }
+    }
+
     protected void decreaseQuality() {
         if (item.quality > 0) item.quality--;
     }

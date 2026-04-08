@@ -7,12 +7,6 @@ class ConjuredItemUpdater extends ItemUpdater {
 
     @Override
     void update() {
-        decreaseQuality();
-        decreaseQuality();
-        item.sellIn--;
-        if (item.sellIn < 0) {
-            decreaseQuality();
-            decreaseQuality();
-        }
+        degradeBy(2);
     }
 }

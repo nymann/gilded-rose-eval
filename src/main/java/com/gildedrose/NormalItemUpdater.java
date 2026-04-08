@@ -7,10 +7,6 @@ class NormalItemUpdater extends ItemUpdater {
 
     @Override
     void update() {
-        decreaseQuality();
-        item.sellIn--;
-        if (item.sellIn < 0) {
-            decreaseQuality();
-        }
+        degradeBy(1);
     }
 }
