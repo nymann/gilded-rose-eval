@@ -49,14 +49,16 @@ class GildedRose {
     }
 
     private void updateConjuredItem(Item item) {
-        item.sellIn--;
-        item.quality = decreaseQuality(item.quality, 2);
+        updateDegradingItem(item, 2);
     }
 
     private void updateNormalItem(Item item) {
+        updateDegradingItem(item, 1);
+    }
+
+    private void updateDegradingItem(Item item, int baseRate) {
         item.sellIn--;
-        int degradeBy = item.sellIn < 0 ? 2 : 1;
-        item.quality = decreaseQuality(item.quality, degradeBy);
+        item.quality = decreaseQuality(item.quality, item.sellIn < 0 ? baseRate * 2 : baseRate);
     }
 
     private int increaseQuality(int quality, int amount) {
