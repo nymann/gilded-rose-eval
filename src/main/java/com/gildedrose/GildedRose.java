@@ -39,7 +39,7 @@ class GildedRose {
             increaseQuality(item);
         } else if (isBackstagePasses(item)) {
             item.quality = 0;
-        } else if (!isSulfuras(item)) {
+        } else {
             decreaseQuality(item);
         }
     }
