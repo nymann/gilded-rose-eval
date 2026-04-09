@@ -84,6 +84,9 @@ class GildedRose {
         public void update(Item item) {
             item.quality -= 2;
             item.sellIn--;
+            if (item.sellIn < 0) {
+                item.quality -= 2;
+            }
         }
     }
 }
