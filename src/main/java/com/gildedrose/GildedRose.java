@@ -21,6 +21,8 @@ class GildedRose {
                 return new BackstagePassUpdater();
             case "Sulfuras, Hand of Ragnaros":
                 return new SulfurasUpdater();
+            case "Conjured Mana Cake":
+                return new ConjuredUpdater();
             default:
                 return new NormalUpdater();
         }
@@ -75,6 +77,13 @@ class GildedRose {
     private static class SulfurasUpdater implements ItemUpdater {
         public void update(Item item) {
             // Sulfuras never changes
+        }
+    }
+
+    private static class ConjuredUpdater implements ItemUpdater {
+        public void update(Item item) {
+            item.quality -= 2;
+            item.sellIn--;
         }
     }
 }
