@@ -61,4 +61,17 @@ public class OracleStoneTest {
             () -> assertTrue(stone.sealed())
         );
     }
+
+    @Test
+    void givenSealedOracleStoneOnValueUpDayWhenDayPassesThenQualityAndSealedStateAreUnchanged() {
+        OracleStone stone = new OracleStone(5, 42, true);
+
+        stone.tick();
+
+        assertAll(
+            () -> assertEquals(6, stone.day()),
+            () -> assertEquals(42, stone.quality()),
+            () -> assertTrue(stone.sealed())
+        );
+    }
 }
