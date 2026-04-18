@@ -18,12 +18,14 @@ class OracleStone {
     OracleStone(int day, int quality, boolean sealed) {
         this.item = new Item(NAME, -day, quality);
         this.sealed = sealed;
+        if (sealed) sealedItems.add(this.item);
     }
 
     OracleStone(int day, int quality, boolean sealed, DoubleSupplier roll) {
         this.item = new Item(NAME, -day, quality);
         this.sealed = sealed;
         rolls.put(this.item, roll);
+        if (sealed) sealedItems.add(this.item);
     }
 
     static double roll(Item item) {
@@ -32,6 +34,10 @@ class OracleStone {
 
     static void seal(Item item) {
         sealedItems.add(item);
+    }
+
+    static boolean isSealed(Item item) {
+        return sealedItems.contains(item);
     }
 
     int day() {

@@ -39,7 +39,7 @@ class GildedRose {
                 items[i].sellIn = items[i].sellIn - 1;
             }
 
-            if (items[i].name.equals(OracleStone.NAME) && (-items[i].sellIn) % 3 == 0) {
+            if (items[i].name.equals(OracleStone.NAME) && (-items[i].sellIn) % 3 == 0 && !OracleStone.isSealed(items[i])) {
                 items[i].quality = items[i].quality + 1;
             }
 

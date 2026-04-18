@@ -59,4 +59,16 @@ public class OracleStoneTest {
         assertEquals(20, stone.quality());
         assertTrue(stone.sealed());
     }
+
+    @Test
+    void givenSealedOracleStoneOnDayBeforeMultipleOfThreeWhenDayPassesThenQualityDoesNotChange() {
+        OracleStone stone = new OracleStone(5, 42, true);
+        GildedRose gildedRose = new GildedRose(new Item[]{stone.toItem()});
+
+        gildedRose.updateQuality();
+
+        assertEquals(6, stone.day());
+        assertEquals(42, stone.quality());
+        assertTrue(stone.sealed());
+    }
 }
