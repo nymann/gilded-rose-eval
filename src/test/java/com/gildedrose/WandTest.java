@@ -32,4 +32,14 @@ public class WandTest {
             () -> assertEquals(18, wand.quality)
         );
     }
+
+    @Test
+    void wandQualityDoesNotDropBelowZero() {
+        Item wand = new Item("Wand", 5, 0);
+        GildedRose gildedRose = new GildedRose(new Item[]{wand});
+
+        gildedRose.updateQuality();
+
+        assertEquals(0, wand.quality);
+    }
 }
