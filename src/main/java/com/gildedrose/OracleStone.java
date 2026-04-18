@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 public class OracleStone extends Item {
 
-    private final boolean sealed;
+    private boolean sealed;
     private final Supplier<Double> oracleRoll;
 
     public OracleStone(int day, int quality, boolean sealed) {
@@ -31,5 +31,9 @@ public class OracleStone extends Item {
 
     public boolean isSealed() {
         return sealed;
+    }
+
+    public void seal() {
+        sealed = true;
     }
 }
