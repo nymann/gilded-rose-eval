@@ -15,6 +15,9 @@ class GildedRose {
                 if (stone.day % 3 == 0) {
                     stone.quality++;
                 }
+                if (stone.day % 7 == 0 && stone.roller.getAsDouble() >= 0.5) {
+                    stone.quality += 10;
+                }
                 continue;
             }
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
