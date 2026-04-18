@@ -26,6 +26,7 @@ public class OracleStone extends Item {
     }
 
     public int quality() {
+        if (ownSealed) return initialQuality;
         int thirdDayBonus = (day() / 3) - (initialDay / 3);
         int oracleBonus = 0;
         for (int d = initialDay + 1; d <= day(); d++) {
