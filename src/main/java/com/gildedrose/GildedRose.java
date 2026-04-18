@@ -22,8 +22,13 @@ class GildedRose {
                 if (items[i].sellIn % 3 == 0) {
                     items[i].quality = items[i].quality + 1;
                 }
-                if (items[i].sellIn % 7 == 0 && oracleRoll.getAsDouble() >= 0.5) {
-                    items[i].quality = items[i].quality + 10;
+                if (items[i].sellIn % 7 == 0) {
+                    double roll = oracleRoll.getAsDouble();
+                    if (roll >= 0.9) {
+                        items[i].name = "Sealed Oracle Stone";
+                    } else if (roll >= 0.5) {
+                        items[i].quality = items[i].quality + 10;
+                    }
                 }
                 continue;
             }

@@ -5,8 +5,22 @@ import org.junit.jupiter.api.Test;
 import java.util.function.DoubleSupplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OracleStoneTest {
+
+    @Test
+    void unfavorableOracleBlessingOnSeventhDaySealsStoneLeavingQualityUnchanged() {
+        Item item = new Item("Oracle Stone", 6, 20);
+        DoubleSupplier unfavorableRoll = () -> 0.95;
+        GildedRose gildedRose = new GildedRose(new Item[]{item}, unfavorableRoll);
+
+        gildedRose.updateQuality();
+
+        assertEquals(7, item.sellIn);
+        assertEquals(20, item.quality);
+        assertTrue(item.name.equals("Sealed Oracle Stone"));
+    }
 
     @Test
     void favorableOracleBlessingOnSeventhDayAddsTenQuality() {
