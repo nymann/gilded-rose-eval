@@ -5,6 +5,9 @@ class OracleStoneUpdater implements ItemUpdater {
     public void update(Item item) {
         OracleStone stone = (OracleStone) item;
         stone.day++;
+        if (stone.sealed) {
+            return;
+        }
         if (stone.day % 3 == 0) {
             stone.quality++;
         }
