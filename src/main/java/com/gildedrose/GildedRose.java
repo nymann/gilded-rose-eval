@@ -14,8 +14,13 @@ class GildedRose {
                 if (stone.day % 3 == 0) {
                     stone.quality += 1;
                 }
-                if (stone.day % 7 == 0 && stone.roller.getAsDouble() >= 0.5) {
-                    stone.quality += 10;
+                if (stone.day % 7 == 0) {
+                    double roll = stone.roller.getAsDouble();
+                    if (roll < 0.9) {
+                        stone.quality += 10;
+                    } else {
+                        stone.sealed = true;
+                    }
                 }
                 continue;
             }
