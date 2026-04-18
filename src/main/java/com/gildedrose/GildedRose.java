@@ -41,6 +41,9 @@ class GildedRose {
                     if (items[i].sellIn % 3 == 0) {
                         items[i].quality = items[i].quality + 1;
                     }
+                    if (items[i].sellIn % 7 == 0 && ((OracleStone) items[i]).roll() >= 0.5) {
+                        items[i].quality = items[i].quality + 10;
+                    }
                 } else {
                     items[i].sellIn = items[i].sellIn - 1;
                 }
