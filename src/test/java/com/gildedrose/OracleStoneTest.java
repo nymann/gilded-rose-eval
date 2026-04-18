@@ -21,6 +21,18 @@ public class OracleStoneTest {
     }
 
     @Test
+    void givenSealedOracleStoneQualityDoesNotIncreaseEvenOnValueUpDay() {
+        OracleStone stone = new OracleStone(5, 42, true);
+        GildedRose app = new GildedRose(new Item[]{stone});
+
+        app.updateQuality();
+
+        assertEquals(6, stone.day);
+        assertEquals(42, stone.quality);
+        assertTrue(stone.sealed);
+    }
+
+    @Test
     void givenUnfavorableOracleRollOnSeventhDayStoneSealedWithQualityUnchanged() {
         DoubleSupplier unfavorableRoll = () -> 0.95;
         OracleStone stone = new OracleStone(6, 20, false, unfavorableRoll);
