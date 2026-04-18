@@ -11,6 +11,17 @@ import java.util.function.DoubleSupplier;
 public class OracleStoneTest {
 
     @Test
+    void givenSealedOracleStoneQualityDoesNotIncreaseEvenOnValueUpDays() {
+        OracleStone stone = new OracleStone(5, 42, true);
+
+        stone.update();
+
+        assertEquals(6, stone.day);
+        assertEquals(42, stone.quality);
+        assertTrue(stone.sealed);
+    }
+
+    @Test
     void givenUnsealedOracleStoneOnDaySevenWithUnfavorableRollStoneBecomesSealed() {
         DoubleSupplier unfavorableRoll = () -> 0.95;
         OracleStone stone = new OracleStone(6, 20, false, unfavorableRoll);

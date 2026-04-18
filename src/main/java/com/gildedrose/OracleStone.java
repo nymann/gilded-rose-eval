@@ -21,7 +21,7 @@ public class OracleStone {
 
     public void update() {
         day++;
-        if (day % 3 == 0) {
+        if (!sealed && day % 3 == 0) {
             quality++;
         }
         if (day == 7) {
