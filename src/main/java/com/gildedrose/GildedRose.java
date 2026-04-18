@@ -14,6 +14,9 @@ class GildedRose {
                 if (items[i].sellIn % 3 == 0) {
                     items[i].quality = items[i].quality + 1;
                 }
+                if (items[i].sellIn % 7 == 0) {
+                    items[i].quality = items[i].quality + 10;
+                }
                 continue;
             }
 
