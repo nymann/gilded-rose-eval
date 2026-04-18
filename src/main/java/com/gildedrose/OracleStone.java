@@ -14,5 +14,10 @@ public class OracleStone extends Item {
     public int quality() { return super.quality; }
     public boolean isSealed() { return sealed; }
 
-    void advanceDay() { day++; }
+    void advanceDay() {
+        day++;
+        if (day % 3 == 0) {
+            super.quality++;
+        }
+    }
 }
