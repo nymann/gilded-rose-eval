@@ -35,6 +35,19 @@ public class OracleStoneTest {
     }
 
     @Test
+    void givenSealedOracleStoneOnValueUpDay_whenDayPasses_thenQualityIsUnchangedAndStoneRemainsSealed() {
+        OracleStone oracleStone = new OracleStone(5, 42);
+        oracleStone.seal();
+        GildedRose gildedRose = new GildedRose(new Item[]{oracleStone});
+
+        gildedRose.updateQuality();
+
+        assertEquals(6, oracleStone.sellIn, "day counter should advance by one");
+        assertEquals(42, oracleStone.quality, "sealed stone should not gain quality even on value-up days");
+        assertTrue(oracleStone.isSealed(), "stone should remain sealed");
+    }
+
+    @Test
     void givenUnsealedOracleStoneOnDayBeforeMultipleOfThree_whenDayPasses_thenQualityIncreasesByOne() {
         Item oracleStone = new Item("Oracle Stone", 2, 20);
         GildedRose gildedRose = new GildedRose(new Item[]{oracleStone});
