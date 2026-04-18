@@ -5,7 +5,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.function.DoubleSupplier;
+
 public class OracleStoneTest {
+
+    @Test
+    void givenUnsealedOracleStoneOnDaySevenWithFavorableRollQualityIncreasesByTen() {
+        DoubleSupplier favorableRoll = () -> 0.5;
+        OracleStone stone = new OracleStone(6, 20, false, favorableRoll);
+
+        stone.update();
+
+        assertEquals(7, stone.day);
+        assertEquals(30, stone.quality);
+        assertFalse(stone.sealed);
+    }
 
     @Test
     void givenUnsealedOracleStoneWhenDayAdvancesToMultipleOfThreeQualityIncreasesByOne() {
