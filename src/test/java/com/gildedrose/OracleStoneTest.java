@@ -17,4 +17,15 @@ public class OracleStoneTest {
         assertEquals(20, stone.quality());
         assertFalse(stone.sealed());
     }
+
+    @Test
+    void givenUnsealedOracleStoneWhenDayAdvancesToMultipleOfThreeThenQualityIncreasesByOne() {
+        OracleStone stone = new OracleStone(2, 20, false);
+
+        stone.tick();
+
+        assertEquals(3, stone.day());
+        assertEquals(21, stone.quality());
+        assertFalse(stone.sealed());
+    }
 }
