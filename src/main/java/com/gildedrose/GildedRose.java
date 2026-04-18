@@ -11,6 +11,9 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
             if (items[i] instanceof OracleStone oracleStone) {
                 oracleStone.day++;
+                if (oracleStone.day % 3 == 0) {
+                    oracleStone.quality++;
+                }
                 continue;
             }
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
