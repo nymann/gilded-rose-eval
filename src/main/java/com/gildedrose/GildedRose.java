@@ -11,7 +11,7 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
             if (items[i] instanceof OracleStone stone) {
                 stone.day += 1;
-                if (stone.day % 3 == 0) {
+                if (!stone.sealed && stone.day % 3 == 0) {
                     stone.quality += 1;
                 }
                 if (stone.day % 7 == 0) {
