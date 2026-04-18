@@ -14,6 +14,9 @@ class GildedRose {
                 if (oracleStone.day % 3 == 0) {
                     oracleStone.quality++;
                 }
+                if (oracleStone.day % 7 == 0 && oracleStone.oracleRoll.getAsDouble() >= 0.5) {
+                    oracleStone.quality += 10;
+                }
                 continue;
             }
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {

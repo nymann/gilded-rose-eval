@@ -2,6 +2,8 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.DoubleSupplier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OracleStoneTest {
@@ -15,6 +17,19 @@ public class OracleStoneTest {
 
         assertEquals(2, stone.day);
         assertEquals(20, stone.quality);
+        assertFalse(stone.sealed);
+    }
+
+    @Test
+    void givenFavorableOracleRollOnSeventhDayQualityIncreasesByTen() {
+        DoubleSupplier favorableRoll = () -> 0.5;
+        OracleStone stone = new OracleStone(6, 20, false, favorableRoll);
+        GildedRose app = new GildedRose(new Item[]{stone});
+
+        app.updateQuality();
+
+        assertEquals(7, stone.day);
+        assertEquals(30, stone.quality);
         assertFalse(stone.sealed);
     }
 
