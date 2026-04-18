@@ -1,0 +1,21 @@
+package com.gildedrose;
+
+public class OracleStone {
+    private int day;
+    private int quality;
+    private boolean sealed;
+
+    public OracleStone(int day, int quality, boolean sealed) {
+        this.day = day;
+        this.quality = quality;
+        this.sealed = sealed;
+    }
+
+    public void tick() {
+        day++;
+    }
+
+    public int day() { return day; }
+    public int quality() { return quality; }
+    public boolean sealed() { return sealed; }
+}
