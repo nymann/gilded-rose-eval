@@ -4,10 +4,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.function.DoubleSupplier;
 
 public class OracleStoneTest {
+
+    @Test
+    void givenUnsealedOracleStoneOnDaySevenWithUnfavorableRollStoneBecomesSealed() {
+        DoubleSupplier unfavorableRoll = () -> 0.95;
+        OracleStone stone = new OracleStone(6, 20, false, unfavorableRoll);
+
+        stone.update();
+
+        assertEquals(7, stone.day);
+        assertEquals(20, stone.quality);
+        assertTrue(stone.sealed);
+    }
 
     @Test
     void givenUnsealedOracleStoneOnDaySevenWithFavorableRollQualityIncreasesByTen() {
