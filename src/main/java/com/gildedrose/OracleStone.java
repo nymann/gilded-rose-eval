@@ -33,7 +33,11 @@ public class OracleStone extends Item {
             quality++;
         }
         if (day % 7 == 0) {
-            quality += 10;
+            if (roll.getAsDouble() < 0.9) {
+                quality += 10;
+            } else {
+                sealed = true;
+            }
         }
     }
 }

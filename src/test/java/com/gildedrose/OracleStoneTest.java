@@ -23,6 +23,21 @@ class OracleStoneTest {
     }
 
     @Test
+    void givenUnsealedOracleStoneWhenUnfavorableOracleBlessingOnSeventhDayThenStoneIsSealedAndQualityUnchanged() {
+        DoubleSupplier unfavorableRoll = () -> 0.95;
+        OracleStone stone = new OracleStone(6, 20, false, unfavorableRoll);
+        GildedRose app = new GildedRose(new Item[]{stone});
+
+        app.updateQuality();
+
+        assertAll(
+            () -> assertEquals(7, stone.day()),
+            () -> assertEquals(20, stone.quality),
+            () -> assertTrue(stone.isSealed())
+        );
+    }
+
+    @Test
     void givenUnsealedOracleStoneWhenFavorableOracleBlessingOnSeventhDayThenQualityIncreasesByTen() {
         DoubleSupplier favorableRoll = () -> 0.5;
         OracleStone stone = new OracleStone(6, 20, false, favorableRoll);
