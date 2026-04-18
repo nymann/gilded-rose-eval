@@ -2,6 +2,8 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Supplier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OracleStoneTest {
@@ -28,6 +30,20 @@ public class OracleStoneTest {
         assertAll(
             () -> assertEquals(3, stone.day()),
             () -> assertEquals(21, stone.quality()),
+            () -> assertFalse(stone.sealed())
+        );
+    }
+
+    @Test
+    void givenUnsealedOracleStoneWithFavorableRollWhenAdvancingToMultipleOfSevenThenQualityIncreasesByTen() {
+        Supplier<Double> favorableRoll = () -> 0.5;
+        OracleStone stone = new OracleStone(6, 20, false, favorableRoll);
+
+        stone.tick();
+
+        assertAll(
+            () -> assertEquals(7, stone.day()),
+            () -> assertEquals(30, stone.quality()),
             () -> assertFalse(stone.sealed())
         );
     }
