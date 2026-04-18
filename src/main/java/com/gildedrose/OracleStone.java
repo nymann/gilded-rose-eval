@@ -13,5 +13,8 @@ public class OracleStone {
 
     public void update() {
         day++;
+        if (day % 3 == 0) {
+            quality++;
+        }
     }
 }

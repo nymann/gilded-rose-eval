@@ -8,6 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class OracleStoneTest {
 
     @Test
+    void givenUnsealedOracleStoneWhenDayAdvancesToMultipleOfThreeQualityIncreasesByOne() {
+        OracleStone stone = new OracleStone(2, 20, false);
+
+        stone.update();
+
+        assertEquals(3, stone.day);
+        assertEquals(21, stone.quality);
+        assertFalse(stone.sealed);
+    }
+
+    @Test
     void givenUnsealedOracleStoneOnOrdinaryDayOnlyTheDayCounterAdvances() {
         OracleStone stone = new OracleStone(1, 20, false);
 
