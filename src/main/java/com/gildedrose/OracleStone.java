@@ -37,6 +37,11 @@ public class OracleStone extends Item {
     }
 
     public boolean sealed() {
+        for (int d = initialDay + 1; d <= day(); d++) {
+            if (d % 7 == 0 && oracleRoll.getAsDouble() > 0.5) {
+                return true;
+            }
+        }
         return ownSealed;
     }
 }
