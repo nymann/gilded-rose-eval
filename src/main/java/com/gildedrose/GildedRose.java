@@ -15,8 +15,11 @@ class GildedRose {
                 if (stone.day % 3 == 0) {
                     stone.quality++;
                 }
-                if (stone.day % 7 == 0 && stone.nextOracleRoll >= 0.5) {
+                if (stone.day % 7 == 0 && stone.nextOracleRoll < 0.9) {
                     stone.quality += 10;
+                }
+                if (stone.day % 7 == 0 && stone.nextOracleRoll >= 0.9) {
+                    stone.sealed = true;
                 }
                 continue;
             }
