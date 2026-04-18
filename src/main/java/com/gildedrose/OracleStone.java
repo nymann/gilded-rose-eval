@@ -24,7 +24,11 @@ public class OracleStone {
             quality++;
         }
         if (day % 7 == 0) {
-            quality += 10;
+            if (roll <= 0.5) {
+                quality += 10;
+            } else {
+                sealed = true;
+            }
         }
     }
 
