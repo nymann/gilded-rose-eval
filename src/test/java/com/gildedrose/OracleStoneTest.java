@@ -59,4 +59,17 @@ public class OracleStoneTest {
         assertEquals(20, item.quality);
         assertTrue(item.sealed);
     }
+
+    @Test
+    void givenSealedOracleStoneOnQualityUpDayWhenDayPassesThenQualityDoesNotIncrease() {
+        Item item = new Item("Oracle Stone", 5, 42);
+        item.sealed = true;
+        GildedRose gildedRose = new GildedRose(new Item[]{item}, () -> 0.5);
+
+        gildedRose.updateQuality();
+
+        assertEquals(6, item.sellIn);
+        assertEquals(42, item.quality);
+        assertTrue(item.sealed);
+    }
 }
