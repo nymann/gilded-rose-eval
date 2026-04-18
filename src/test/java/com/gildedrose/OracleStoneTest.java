@@ -7,6 +7,22 @@ import java.util.function.DoubleSupplier;
 
 class OracleStoneTest {
 
+    private static boolean isSealed(Item item) {
+        return item.name.startsWith("Sealed");
+    }
+
+    @Test
+    void givenUnsealedOracleStoneOnSeventhDayWhenUnfavorableOracleBlessingThenStoneIsSealedAndQualityUnchanged() {
+        Item item = new Item("Oracle Stone", 6, 20);
+        GildedRose app = new GildedRose(new Item[]{item}, () -> 0.95);
+
+        app.updateQuality();
+
+        assertEquals(7, item.sellIn, "day");
+        assertEquals(20, item.quality, "quality");
+        assertTrue(isSealed(item), "sealed");
+    }
+
     @Test
     void givenUnsealedOracleStoneOnSeventhDayWhenFavorableOracleBlessingThenQualityAddsTen() {
         Item item = new Item("Oracle Stone", 6, 20);
