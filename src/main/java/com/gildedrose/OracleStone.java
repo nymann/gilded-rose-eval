@@ -21,5 +21,8 @@ public class OracleStone extends Item {
 
     void incrementDay() {
         day++;
+        if (day % 3 == 0) {
+            quality++;
+        }
     }
 }

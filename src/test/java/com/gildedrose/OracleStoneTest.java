@@ -19,4 +19,18 @@ class OracleStoneTest {
             () -> assertFalse(stone.isSealed())
         );
     }
+
+    @Test
+    void givenUnsealedOracleStoneWhenDayAdvancesToAMultipleOfThreeThenQualityIncreasesByOne() {
+        OracleStone stone = new OracleStone(2, 20, false);
+        GildedRose app = new GildedRose(new Item[]{stone});
+
+        app.updateQuality();
+
+        assertAll(
+            () -> assertEquals(3, stone.day()),
+            () -> assertEquals(21, stone.quality),
+            () -> assertFalse(stone.isSealed())
+        );
+    }
 }
