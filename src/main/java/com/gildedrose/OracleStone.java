@@ -22,5 +22,8 @@ class OracleStone {
     void sync() {
         day++;
         quality = item.quality;
+        if (day % 3 == 0) {
+            quality++;
+        }
     }
 }
