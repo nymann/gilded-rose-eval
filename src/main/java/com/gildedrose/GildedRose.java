@@ -9,10 +9,13 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (items[i].name.equals("Oracle Stone")) {
+            if (items[i] instanceof OracleStone oracleStone) {
                 items[i].sellIn = items[i].sellIn + 1;
                 if (items[i].sellIn % 3 == 0) {
                     items[i].quality = items[i].quality + 1;
+                }
+                if (items[i].sellIn % 7 == 0 && oracleStone.nextRoll() >= 0.5) {
+                    items[i].quality = items[i].quality + 10;
                 }
                 continue;
             }

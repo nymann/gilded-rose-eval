@@ -1,25 +1,36 @@
 package com.gildedrose;
 
-public class OracleStone {
-    private final Item item;
+import java.util.function.DoubleSupplier;
+
+public class OracleStone extends Item {
+    private final DoubleSupplier roll;
 
     public OracleStone(int day, int quality, boolean sealed) {
-        this.item = new Item("Oracle Stone", day, quality);
+        this(day, quality, sealed, Math::random);
+    }
+
+    public OracleStone(int day, int quality, boolean sealed, DoubleSupplier roll) {
+        super("Oracle Stone", day, quality);
+        this.roll = roll;
     }
 
     public Item toItem() {
-        return item;
+        return this;
     }
 
     public int day() {
-        return item.sellIn;
+        return sellIn;
     }
 
     public int quality() {
-        return item.quality;
+        return quality;
     }
 
     public boolean sealed() {
         return false;
+    }
+
+    public double nextRoll() {
+        return roll.getAsDouble();
     }
 }
