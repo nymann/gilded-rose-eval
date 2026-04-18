@@ -20,6 +20,16 @@ public class WandTest {
     }
 
     @Test
+    void wand_quality_does_not_drop_below_zero() {
+        Item wand = new Item("Wand", 5, 0);
+        GildedRose gildedRose = new GildedRose(new Item[]{wand});
+
+        gildedRose.updateQuality();
+
+        assertEquals(0, wand.quality);
+    }
+
+    @Test
     void wand_quality_degrades_twice_as_fast_once_sell_in_has_passed() {
         Item wand = new Item("Wand", 0, 20);
         GildedRose gildedRose = new GildedRose(new Item[]{wand});
