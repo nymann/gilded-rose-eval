@@ -9,6 +9,19 @@ import java.util.function.DoubleSupplier;
 public class OracleStoneTest {
 
     @Test
+    void sealedOracleStoneDoesNotGainQualityEvenOnValueUpDays() {
+        Item item = new Item("Oracle Stone", 13, 42);
+        GildedRose gildedRose = new GildedRose(new Item[]{item}, () -> 0.95);
+        gildedRose.updateQuality(); // seals on day 14 (14 % 7 == 0, unfavorable roll)
+
+        gildedRose.updateQuality(); // day 15 is a multiple of 3 — quality would normally increase
+
+        assertEquals(15, item.sellIn);
+        assertEquals(42, item.quality);
+        assertTrue(gildedRose.isSealed(item));
+    }
+
+    @Test
     void unfavorableOracleBlessingOnTheSeventhDaySealsStoneLeavingQualityUnchanged() {
         Item item = new Item("Oracle Stone", 6, 20);
         GildedRose gildedRose = new GildedRose(new Item[]{item}, () -> 0.95);
