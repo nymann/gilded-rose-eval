@@ -1,10 +1,13 @@
 package com.gildedrose;
 
 import java.util.function.DoubleSupplier;
+import java.util.HashSet;
+import java.util.Set;
 
 class GildedRose {
     Item[] items;
     private final DoubleSupplier oracleRoll;
+    private final Set<Item> sealedItems = new HashSet<>();
 
     public GildedRose(Item[] items) {
         this(items, Math::random);
@@ -15,6 +18,10 @@ class GildedRose {
         this.oracleRoll = oracleRoll;
     }
 
+    public boolean isSealed(Item item) {
+        return sealedItems.contains(item);
+    }
+
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             if (items[i].name.equals("Oracle Stone")) {
@@ -22,8 +29,13 @@ class GildedRose {
                 if (items[i].sellIn % 3 == 0) {
                     items[i].quality = items[i].quality + 1;
                 }
-                if (items[i].sellIn % 7 == 0 && oracleRoll.getAsDouble() >= 0.5) {
-                    items[i].quality = items[i].quality + 10;
+                if (items[i].sellIn % 7 == 0) {
+                    double roll = oracleRoll.getAsDouble();
+                    if (roll >= 0.9) {
+                        sealedItems.add(items[i]);
+                    } else if (roll >= 0.5) {
+                        items[i].quality = items[i].quality + 10;
+                    }
                 }
                 continue;
             }

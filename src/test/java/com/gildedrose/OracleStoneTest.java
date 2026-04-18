@@ -3,9 +3,22 @@ package com.gildedrose;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.function.DoubleSupplier;
 
 public class OracleStoneTest {
+
+    @Test
+    void unfavorableOracleBlessingOnTheSeventhDaySealsStoneLeavingQualityUnchanged() {
+        Item item = new Item("Oracle Stone", 6, 20);
+        GildedRose gildedRose = new GildedRose(new Item[]{item}, () -> 0.95);
+
+        gildedRose.updateQuality();
+
+        assertEquals(7, item.sellIn);
+        assertEquals(20, item.quality);
+        assertTrue(gildedRose.isSealed(item));
+    }
 
     @Test
     void favorableOracleBlessingOnTheSeventhDayAddsTenQuality() {
