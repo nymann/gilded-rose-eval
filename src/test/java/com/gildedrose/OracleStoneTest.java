@@ -47,4 +47,18 @@ public class OracleStoneTest {
             () -> assertFalse(stone.sealed())
         );
     }
+
+    @Test
+    void givenUnsealedOracleStoneWithUnfavorableRollWhenAdvancingToMultipleOfSevenThenStoneSealsWithNoQualityChange() {
+        Supplier<Double> unfavorableRoll = () -> 0.95;
+        OracleStone stone = new OracleStone(6, 20, false, unfavorableRoll);
+
+        stone.tick();
+
+        assertAll(
+            () -> assertEquals(7, stone.day()),
+            () -> assertEquals(20, stone.quality()),
+            () -> assertTrue(stone.sealed())
+        );
+    }
 }

@@ -25,7 +25,11 @@ public class OracleStone {
             quality++;
         }
         if (day % 7 == 0) {
-            quality += 10;
+            if (oracle.get() < 0.9) {
+                quality += 10;
+            } else {
+                sealed = true;
+            }
         }
     }
 
