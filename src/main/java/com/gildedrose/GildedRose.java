@@ -16,7 +16,12 @@ class GildedRose {
                     stone.quality++;
                 }
                 if (stone.day % 7 == 0) {
-                    stone.quality += 10;
+                    double roll = stone.oracleRoll.getAsDouble();
+                    if (roll < 0.9) {
+                        stone.quality += 10;
+                    } else {
+                        stone.sealed = true;
+                    }
                 }
                 continue;
             }
