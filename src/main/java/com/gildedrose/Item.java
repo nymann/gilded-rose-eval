@@ -8,6 +8,8 @@ public class Item {
 
     public int quality;
 
+    public boolean sealed;
+
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
