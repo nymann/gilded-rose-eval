@@ -12,10 +12,10 @@ class GildedRose {
             if (items[i] instanceof OracleStone) {
                 OracleStone stone = (OracleStone) items[i];
                 stone.day++;
-                if (stone.day % 3 == 0) {
+                if (!stone.sealed && stone.day % 3 == 0) {
                     stone.quality++;
                 }
-                if (stone.day % 7 == 0) {
+                if (!stone.sealed && stone.day % 7 == 0) {
                     double roll = stone.oracleRoll.getAsDouble();
                     if (roll < 0.9) {
                         stone.quality += 10;
