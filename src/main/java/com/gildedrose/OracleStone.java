@@ -1,14 +1,22 @@
 package com.gildedrose;
 
+import java.util.function.DoubleSupplier;
+
 class OracleStone {
     private int day;
     private int quality;
     private boolean sealed;
+    private final DoubleSupplier roller;
 
     OracleStone(int day, int quality, boolean sealed) {
+        this(day, quality, sealed, Math::random);
+    }
+
+    OracleStone(int day, int quality, boolean sealed, DoubleSupplier roller) {
         this.day = day;
         this.quality = quality;
         this.sealed = sealed;
+        this.roller = roller;
     }
 
     void advanceDay() {
