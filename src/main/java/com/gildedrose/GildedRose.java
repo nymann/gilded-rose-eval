@@ -17,6 +17,11 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
+            if (items[i].name.equals("Sealed Oracle Stone")) {
+                items[i].sellIn = items[i].sellIn + 1;
+                continue;
+            }
+
             if (items[i].name.equals("Oracle Stone")) {
                 items[i].sellIn = items[i].sellIn + 1;
                 if (items[i].sellIn % 3 == 0) {
