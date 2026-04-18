@@ -18,4 +18,17 @@ public class OracleStoneTest {
             () -> assertFalse(stone.sealed())
         );
     }
+
+    @Test
+    void givenUnsealedOracleStoneOnDayBeforeMultipleOfThreeWhenDayPassesThenQualityIncreasesByOne() {
+        OracleStone stone = new OracleStone(2, 20, false);
+
+        stone.tick();
+
+        assertAll(
+            () -> assertEquals(3, stone.day()),
+            () -> assertEquals(21, stone.quality()),
+            () -> assertFalse(stone.sealed())
+        );
+    }
 }

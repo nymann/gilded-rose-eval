@@ -13,6 +13,9 @@ public class OracleStone {
 
     public void tick() {
         day++;
+        if (day % 3 == 0) {
+            quality++;
+        }
     }
 
     public int day() { return day; }
