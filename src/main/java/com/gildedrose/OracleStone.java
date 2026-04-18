@@ -21,7 +21,7 @@ class OracleStone {
 
     void advanceDay() {
         day += 1;
-        if (day % 3 == 0) {
+        if (!sealed && day % 3 == 0) {
             quality += 1;
         }
         if (day % 7 == 0) {

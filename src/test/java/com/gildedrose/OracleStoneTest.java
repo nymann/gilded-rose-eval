@@ -10,6 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OracleStoneTest {
 
     @Test
+    void sealedOracleStoneDoesNotGainQualityEvenOnValueUpDays() {
+        OracleStone stone = new OracleStone(5, 42, true);
+
+        stone.advanceDay();
+
+        assertAll(
+            () -> assertEquals(6, stone.day()),
+            () -> assertEquals(42, stone.quality()),
+            () -> assertTrue(stone.sealed())
+        );
+    }
+
+    @Test
     void unfavorableOracleBlessingOnSeventhDaySealsStoneLeavingQualityUnchanged() {
         OracleStone stone = new OracleStone(6, 20, false, () -> 0.95);
 
