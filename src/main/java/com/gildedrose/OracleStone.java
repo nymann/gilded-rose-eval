@@ -13,6 +13,9 @@ class OracleStone {
 
     void advanceDay() {
         day += 1;
+        if (day % 3 == 0) {
+            quality += 1;
+        }
     }
 
     int day() { return day; }
