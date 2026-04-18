@@ -21,6 +21,7 @@ class OracleStone {
 
     void tick() {
         day++;
+        if (sealed) return;
         if (day % 3 == 0) {
             quality++;
         }
