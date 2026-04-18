@@ -13,6 +13,7 @@ class GildedRose {
         UPDATERS.put("Aged Brie", new AgedBrieUpdater());
         UPDATERS.put("Backstage passes to a TAFKAL80ETC concert", new BackstagePassUpdater());
         UPDATERS.put("Sulfuras, Hand of Ragnaros", new SulfurasUpdater());
+        UPDATERS.put("Oracle Stone", new OracleStoneUpdater());
     }
 
     public GildedRose(Item[] items) {
