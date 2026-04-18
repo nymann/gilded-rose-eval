@@ -28,4 +28,15 @@ public class OracleStoneTest {
         assertEquals(21, stone.quality());
         assertFalse(stone.sealed());
     }
+
+    @Test
+    void givenUnsealedOracleStoneOnDaySevenWhenOracleBlessingIsFavorableThenQualityIncreasesByTen() {
+        OracleStone stone = new OracleStone(6, 20, false);
+
+        stone.tick(0.5);
+
+        assertEquals(7, stone.day());
+        assertEquals(30, stone.quality());
+        assertFalse(stone.sealed());
+    }
 }

@@ -18,6 +18,16 @@ public class OracleStone {
         }
     }
 
+    public void tick(double roll) {
+        day++;
+        if (day % 3 == 0) {
+            quality++;
+        }
+        if (day % 7 == 0) {
+            quality += 10;
+        }
+    }
+
     public int day() { return day; }
     public int quality() { return quality; }
     public boolean sealed() { return sealed; }
