@@ -43,6 +43,10 @@ class GildedRose {
                 items[i].quality = items[i].quality + 1;
             }
 
+            if (items[i].name.equals(OracleStone.NAME) && (-items[i].sellIn) % 7 == 0 && OracleStone.roll(items[i]) >= 0.5) {
+                items[i].quality = items[i].quality + 10;
+            }
+
             if (items[i].sellIn < 0) {
                 if (!items[i].name.equals("Aged Brie")) {
                     if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
