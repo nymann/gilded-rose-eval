@@ -9,6 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OracleStoneTest {
 
     @Test
+    void givenSealedOracleStoneOnValueUpDay_whenDayPasses_thenDayAdvancesQualityUnchangedRemainsSealed() {
+        OracleStone stone = new OracleStone(5, 42, true);
+        GildedRose gildedRose = new GildedRose(new Item[]{stone});
+
+        gildedRose.updateQuality();
+
+        assertEquals(6, stone.day);
+        assertEquals(42, stone.quality);
+        assertTrue(stone.sealed);
+    }
+
+    @Test
     void givenUnsealedOracleStoneWithUnfavorableRollOnSeventhDay_whenDayPasses_thenDayAdvancesQualityUnchangedBecomesSealed() {
         OracleStone stone = new OracleStone(6, 20, false, () -> 0.95);
         GildedRose gildedRose = new GildedRose(new Item[]{stone});
