@@ -18,4 +18,17 @@ public class WandTest {
             () -> assertEquals(19, wand.quality)
         );
     }
+
+    @Test
+    void givenWandWithSellIn0AndQuality20_whenDayPasses_thenSellInIsNeg1AndQualityIs18() {
+        Item wand = new Item("Wand", 0, 20);
+        GildedRose gildedRose = new GildedRose(new Item[]{wand});
+
+        gildedRose.updateQuality();
+
+        assertAll(
+            () -> assertEquals(-1, wand.sellIn),
+            () -> assertEquals(18, wand.quality)
+        );
+    }
 }
