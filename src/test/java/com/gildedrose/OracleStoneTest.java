@@ -17,4 +17,15 @@ public class OracleStoneTest {
         assertEquals(2, item.sellIn);
         assertEquals(20, item.quality);
     }
+
+    @Test
+    void givenUnsealedOracleStoneOnDayTwoWhenDayPassesThenQualityIncreasesOnThirdDay() {
+        Item item = new Item("Oracle Stone", 2, 20);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(3, item.sellIn);
+        assertEquals(21, item.quality);
+    }
 }
