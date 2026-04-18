@@ -4,8 +4,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OracleStoneTest {
+
+    @Test
+    void givenUnsealedOracleStoneWithUnfavorableRollOnSeventhDay_whenDayPasses_thenDayAdvancesQualityUnchangedBecomesSealed() {
+        OracleStone stone = new OracleStone(6, 20, false, () -> 0.95);
+        GildedRose gildedRose = new GildedRose(new Item[]{stone});
+
+        gildedRose.updateQuality();
+
+        assertEquals(7, stone.day);
+        assertEquals(20, stone.quality);
+        assertTrue(stone.sealed);
+    }
 
     @Test
     void givenUnsealedOracleStoneWithFavorableRollOnSeventhDay_whenDayPasses_thenDayAdvancesQualityGainsTenRemainsUnsealed() {
