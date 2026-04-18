@@ -12,7 +12,7 @@ class GildedRose {
             if (items[i].name.equals("Oracle Stone")) {
                 OracleStone stone = (OracleStone) items[i];
                 stone.day++;
-                if (stone.day % 3 == 0) {
+                if (!stone.sealed && stone.day % 3 == 0) {
                     stone.quality++;
                 }
                 if (stone.day % 7 == 0 && stone.nextOracleRoll < 0.9) {
