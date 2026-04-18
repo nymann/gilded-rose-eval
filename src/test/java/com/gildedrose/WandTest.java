@@ -18,4 +18,17 @@ public class WandTest {
             () -> assertEquals(19, wand.quality)
         );
     }
+
+    @Test
+    void wand_quality_degrades_twice_as_fast_once_sell_in_has_passed() {
+        Item wand = new Item("Wand", 0, 20);
+        GildedRose gildedRose = new GildedRose(new Item[]{wand});
+
+        gildedRose.updateQuality();
+
+        assertAll(
+            () -> assertEquals(-1, wand.sellIn),
+            () -> assertEquals(18, wand.quality)
+        );
+    }
 }
