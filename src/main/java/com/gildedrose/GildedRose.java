@@ -38,6 +38,9 @@ class GildedRose {
             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                 if (items[i].name.equals("Oracle Stone")) {
                     items[i].sellIn = items[i].sellIn + 1;
+                    if (items[i].sellIn % 3 == 0) {
+                        items[i].quality = items[i].quality + 1;
+                    }
                 } else {
                     items[i].sellIn = items[i].sellIn - 1;
                 }
