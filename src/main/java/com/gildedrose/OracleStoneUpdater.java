@@ -8,5 +8,8 @@ class OracleStoneUpdater implements ItemUpdater {
         if (stone.day % 3 == 0) {
             stone.quality++;
         }
+        if (stone.day % 7 == 0 && stone.roller.getAsDouble() >= 0.5) {
+            stone.quality += 10;
+        }
     }
 }
