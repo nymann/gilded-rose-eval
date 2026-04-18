@@ -1,14 +1,44 @@
 package com.gildedrose;
 
+import java.util.function.DoubleSupplier;
+import java.util.HashSet;
+import java.util.Set;
+
 class GildedRose {
     Item[] items;
+    private final DoubleSupplier oracleRoll;
+    private final Set<Item> sealedItems = new HashSet<>();
 
     public GildedRose(Item[] items) {
+        this(items, Math::random);
+    }
+
+    public GildedRose(Item[] items, DoubleSupplier oracleRoll) {
         this.items = items;
+        this.oracleRoll = oracleRoll;
+    }
+
+    public boolean isSealed(Item item) {
+        return sealedItems.contains(item);
     }
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
+            if (items[i].name.equals("Oracle Stone")) {
+                items[i].sellIn = items[i].sellIn + 1;
+                if (items[i].sellIn % 3 == 0 && !sealedItems.contains(items[i])) {
+                    items[i].quality = items[i].quality + 1;
+                }
+                if (items[i].sellIn % 7 == 0) {
+                    double roll = oracleRoll.getAsDouble();
+                    if (roll >= 0.9) {
+                        sealedItems.add(items[i]);
+                    } else if (roll >= 0.5) {
+                        items[i].quality = items[i].quality + 10;
+                    }
+                }
+                continue;
+            }
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
