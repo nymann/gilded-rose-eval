@@ -1,16 +1,19 @@
 package com.gildedrose;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.DoubleSupplier;
 
 class OracleStone {
     static final String NAME = "Oracle Stone";
 
     private static final Map<Item, DoubleSupplier> rolls = new HashMap<>();
+    private static final Set<Item> sealedItems = new HashSet<>();
 
     private final Item item;
-    private final boolean sealed;
+    private boolean sealed;
 
     OracleStone(int day, int quality, boolean sealed) {
         this.item = new Item(NAME, -day, quality);
@@ -27,6 +30,10 @@ class OracleStone {
         return rolls.getOrDefault(item, Math::random).getAsDouble();
     }
 
+    static void seal(Item item) {
+        sealedItems.add(item);
+    }
+
     int day() {
         return -item.sellIn;
     }
@@ -36,7 +43,7 @@ class OracleStone {
     }
 
     boolean sealed() {
-        return sealed;
+        return sealed || sealedItems.contains(item);
     }
 
     Item toItem() {

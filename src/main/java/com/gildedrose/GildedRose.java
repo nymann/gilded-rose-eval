@@ -43,8 +43,13 @@ class GildedRose {
                 items[i].quality = items[i].quality + 1;
             }
 
-            if (items[i].name.equals(OracleStone.NAME) && (-items[i].sellIn) % 7 == 0 && OracleStone.roll(items[i]) >= 0.5) {
-                items[i].quality = items[i].quality + 10;
+            if (items[i].name.equals(OracleStone.NAME) && (-items[i].sellIn) % 7 == 0) {
+                double roll = OracleStone.roll(items[i]);
+                if (roll >= 0.5 && roll < 0.95) {
+                    items[i].quality = items[i].quality + 10;
+                } else if (roll >= 0.95) {
+                    OracleStone.seal(items[i]);
+                }
             }
 
             if (items[i].sellIn < 0) {
