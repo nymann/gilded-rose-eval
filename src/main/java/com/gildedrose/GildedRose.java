@@ -1,10 +1,18 @@
 package com.gildedrose;
 
+import java.util.function.DoubleSupplier;
+
 class GildedRose {
     Item[] items;
+    private final DoubleSupplier oracleRoll;
 
     public GildedRose(Item[] items) {
+        this(items, Math::random);
+    }
+
+    public GildedRose(Item[] items, DoubleSupplier oracleRoll) {
         this.items = items;
+        this.oracleRoll = oracleRoll;
     }
 
     public void updateQuality() {
@@ -15,7 +23,11 @@ class GildedRose {
                     items[i].quality = items[i].quality + 1;
                 }
                 if (items[i].sellIn % 7 == 0) {
-                    items[i].quality = items[i].quality + 10;
+                    if (oracleRoll.getAsDouble() >= 0.9) {
+                        items[i].name = "Sealed Oracle Stone";
+                    } else {
+                        items[i].quality = items[i].quality + 10;
+                    }
                 }
                 continue;
             }
