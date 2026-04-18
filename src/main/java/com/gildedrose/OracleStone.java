@@ -24,6 +24,7 @@ class OracleStone extends Item {
 
     void advanceDay() {
         day++;
+        if (sealed) return;
         if (day % 3 == 0) quality++;
         if (day % 7 == 0) {
             double roll = oracleRoll.getAsDouble();
