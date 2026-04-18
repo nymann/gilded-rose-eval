@@ -7,6 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OracleStoneTest {
 
     @Test
+    void givenUnsealedOracleStoneOnSeventhDayWithFavorableRollWhenDayPassesThenQualityIncreasesByTen() {
+        OracleStone stone = new OracleStone(6, 20, false, () -> 0.5);
+
+        stone.tick();
+
+        assertEquals(7, stone.day);
+        assertEquals(30, stone.quality);
+        assertFalse(stone.sealed);
+    }
+
+    @Test
     void givenUnsealedOracleStoneOnEveryThirdDayWhenDayPassesThenQualityIncreasesByOne() {
         OracleStone stone = new OracleStone(2, 20, false);
 
