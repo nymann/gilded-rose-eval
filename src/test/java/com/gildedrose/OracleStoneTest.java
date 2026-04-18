@@ -18,4 +18,16 @@ public class OracleStoneTest {
         assertEquals(20, item.quality);
         assertFalse(item.sealed);
     }
+
+    @Test
+    void givenUnsealedOracleStoneOnEveryThirdDayWhenDayPassesThenQualityIncreasesByOne() {
+        Item item = new Item("Oracle Stone", 2, 20);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(3, item.sellIn);
+        assertEquals(21, item.quality);
+        assertFalse(item.sealed);
+    }
 }
