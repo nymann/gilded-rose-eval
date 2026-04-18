@@ -9,6 +9,20 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
+            if (items[i].name.equals("Oracle Stone")) {
+                OracleStone stone = (OracleStone) items[i];
+                stone.day++;
+                if (!stone.sealed && stone.day % 3 == 0) {
+                    stone.quality++;
+                }
+                if (stone.day % 7 == 0 && stone.nextOracleRoll < 0.9) {
+                    stone.quality += 10;
+                }
+                if (stone.day % 7 == 0 && stone.nextOracleRoll >= 0.9) {
+                    stone.sealed = true;
+                }
+                continue;
+            }
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
