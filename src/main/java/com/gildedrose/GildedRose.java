@@ -1,14 +1,27 @@
 package com.gildedrose;
 
+import java.util.function.DoubleSupplier;
+
 class GildedRose {
     Item[] items;
+    private final DoubleSupplier oracleRollSupplier;
 
     public GildedRose(Item[] items) {
+        this(items, Math::random);
+    }
+
+    public GildedRose(Item[] items, DoubleSupplier oracleRollSupplier) {
         this.items = items;
+        this.oracleRollSupplier = oracleRollSupplier;
     }
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
+            if (items[i] instanceof OracleStone oracle) {
+                updateOracleStone(oracle);
+                continue;
+            }
+
             if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
@@ -56,6 +69,22 @@ class GildedRose {
                     }
                 }
             }
+        }
+    }
+
+    private void updateOracleStone(OracleStone oracle) {
+        oracle.day++;
+        if (oracle.sealed) return;
+
+        if (oracle.day % 7 == 0) {
+            double roll = oracleRollSupplier.getAsDouble();
+            if (roll < 0.7) {
+                oracle.quality += 10;
+            } else {
+                oracle.sealed = true;
+            }
+        } else if (oracle.day % 3 == 0) {
+            oracle.quality++;
         }
     }
 }
