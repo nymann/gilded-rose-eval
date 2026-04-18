@@ -8,6 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class OracleStoneTest {
 
     @Test
+    void givenUnseagedOracleStoneWhenFavorableOracleBlessingOnSeventhDayQualityIncreasesByTen() {
+        OracleStone stone = new OracleStone(6, 20, false);
+        stone.setNextOracleRoll(0.5);
+        GildedRose gildedRose = new GildedRose(new Item[]{stone});
+
+        gildedRose.updateQuality();
+
+        assertEquals(7, stone.day);
+        assertEquals(30, stone.quality);
+        assertFalse(stone.sealed);
+    }
+
+    @Test
     void givenUnseagedOracleStoneOnEveryThirdDayQualityIncreasesByOne() {
         OracleStone stone = new OracleStone(2, 20, false);
         GildedRose gildedRose = new GildedRose(new Item[]{stone});
