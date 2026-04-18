@@ -9,6 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class OracleStoneTest {
 
     @Test
+    void favorableOracleBlessingOnSeventhDayAddsTenQuality() {
+        OracleStone stone = new OracleStone(6, 20, false, () -> 0.5);
+
+        stone.advanceDay();
+
+        assertAll(
+            () -> assertEquals(7, stone.day()),
+            () -> assertEquals(30, stone.quality()),
+            () -> assertFalse(stone.sealed())
+        );
+    }
+
+    @Test
     void unsealedOracleStoneGainsOneQualityOnEveryThirdDay() {
         OracleStone stone = new OracleStone(2, 20, false);
 
