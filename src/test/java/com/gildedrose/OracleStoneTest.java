@@ -12,6 +12,18 @@ class OracleStoneTest {
     }
 
     @Test
+    void givenSealedOracleStoneOnValueUpDayWhenDayPassesThenDayAdvancesAndQualityAndSealedAreUnchanged() {
+        Item item = new Item("Sealed Oracle Stone", 5, 42);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.updateQuality();
+
+        assertEquals(6, item.sellIn, "day");
+        assertEquals(42, item.quality, "quality");
+        assertTrue(isSealed(item), "sealed");
+    }
+
+    @Test
     void givenUnsealedOracleStoneOnSeventhDayWhenUnfavorableOracleBlessingThenStoneIsSealedAndQualityUnchanged() {
         Item item = new Item("Oracle Stone", 6, 20);
         GildedRose app = new GildedRose(new Item[]{item}, () -> 0.95);
