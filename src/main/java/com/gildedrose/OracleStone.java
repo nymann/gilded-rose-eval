@@ -4,7 +4,7 @@ import java.util.function.DoubleSupplier;
 
 class OracleStone extends Item {
     private int day;
-    private final boolean sealed;
+    private boolean sealed;
     private final DoubleSupplier oracleRoll;
 
     OracleStone(int day, int quality, boolean sealed) {
@@ -25,6 +25,10 @@ class OracleStone extends Item {
     void advanceDay() {
         day++;
         if (day % 3 == 0) quality++;
-        if (day % 7 == 0 && oracleRoll.getAsDouble() >= 0.5) quality += 10;
+        if (day % 7 == 0) {
+            double roll = oracleRoll.getAsDouble();
+            if (roll <= 0.5) quality += 10;
+            else sealed = true;
+        }
     }
 }
