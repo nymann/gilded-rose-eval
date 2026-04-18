@@ -5,8 +5,22 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OracleStoneTest {
+
+    @Test
+    void unfavorableOracleBlessingOnSeventhDaySealsStoneLeavingQualityUnchanged() {
+        OracleStone stone = new OracleStone(6, 20, false, () -> 0.95);
+
+        stone.advanceDay();
+
+        assertAll(
+            () -> assertEquals(7, stone.day()),
+            () -> assertEquals(20, stone.quality()),
+            () -> assertTrue(stone.sealed())
+        );
+    }
 
     @Test
     void favorableOracleBlessingOnSeventhDayAddsTenQuality() {

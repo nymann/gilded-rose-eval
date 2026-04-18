@@ -24,8 +24,13 @@ class OracleStone {
         if (day % 3 == 0) {
             quality += 1;
         }
-        if (day % 7 == 0 && roller.getAsDouble() >= 0.5) {
-            quality += 10;
+        if (day % 7 == 0) {
+            double roll = roller.getAsDouble();
+            if (roll < 0.9) {
+                quality += 10;
+            } else {
+                sealed = true;
+            }
         }
     }
 
